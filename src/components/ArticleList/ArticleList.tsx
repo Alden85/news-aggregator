@@ -1,13 +1,11 @@
-import { Response_NA } from "../../interfaces/news/newsapi/response";
-import { Response_TG } from "../../interfaces/news/theguardian/response";
-import { isResponseTG } from "../../utils/isResponse";
-import { useSearchFilter } from "../../hooks/useSearchFilter";
-import ArticleTG from "../Article/ArticleTG";
-import ArticleNA from "../Article/ArticleNA";
+import useSearchFilter from "../../hooks/useSearchFilter";
+import { UnifiedArticle } from "../../interfaces/news/unified-article";
+//import ArticleTG from "../Article/ArticleTG";
 import { v4 as uuidv4 } from "uuid";
+import Article from "../Article/Article";
 
 interface Props {
-  responses: (Response_TG | Response_NA)[];
+  responses: UnifiedArticle[];
   searchTerm: string;
   sortOrder: string;
 }
@@ -15,15 +13,13 @@ interface Props {
 const ArticleList = ({ responses, searchTerm, sortOrder }: Props) => {
   const filteredResponses = useSearchFilter(responses, searchTerm, sortOrder);
 
-  const renderResponse = (response: Response_TG | Response_NA) => {
-    if (isResponseTG(response)) {
-      return <ArticleTG key={uuidv4()} response={response} />;
-    } else {
-      return <ArticleNA key={uuidv4()} response={response} />;
-    }
-  };
-
-  return <>{filteredResponses?.map(renderResponse)}</>;
+  return (
+    <div>
+      {filteredResponses?.map((response: UnifiedArticle) => {
+        return <Article key={response.id || uuidv4()} response={response} />;
+      })}
+    </div>
+  );
 };
 
 export default ArticleList;

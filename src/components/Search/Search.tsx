@@ -15,12 +15,16 @@ const Search = ({ onSearchChange }: Props) => {
   };
 
   return (
-    <div>
+    <div className="input-group mb-3">
+      <span className="input-group-text mt-1" id="basic-addon1">
+        Sarch
+      </span>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="search articles..."
         value={searchTerm}
         onChange={handleInputChange}
+        className="form-control mt-1"
       />
     </div>
   );

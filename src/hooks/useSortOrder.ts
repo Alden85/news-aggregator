@@ -11,10 +11,15 @@ const useSortOrder = () => {
     setSortOrder("source");
   }, []);
 
+  const handleSortByCategory = useCallback(() => {
+    setSortOrder("category");
+  }, []);
+
   return {
     sortOrder,
     handleSortByDate,
     handleSortBySource,
+    handleSortByCategory,
   };
 };
 

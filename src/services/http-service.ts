@@ -11,7 +11,7 @@ class HttpService {
 
   getAll<T>(params?: Record<string, unknown>) {
     const controller = new AbortController();
-    const request = this.client.get<T[]>(this.endpoint, {
+    const request = this.client.get<T>(this.endpoint, {
       params,
       signal: controller.signal,
     });

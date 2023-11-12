@@ -5,7 +5,6 @@ const useSearch = () => {
 
   const handleSearchChange = (term: string) => {
     setSearchTerm(term);
-    // You might also want to debounced fetchArticles here if applicable.
   };
 
   return {
