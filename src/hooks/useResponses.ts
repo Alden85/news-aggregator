@@ -21,17 +21,18 @@ const useResponses = () => {
       "api-key": tgApiKey,
     });
 
-    // const naRequest = naService.getAll<Response_TG>({
-    //   page,
-    //   "api-key": tgApiKey,
-    // });
-
-    const naApiKey = import.meta.env.VITE_API_KEY_NA;
-    const naRequest = naService.getAll<Response_NA>({
+    const naRequest = naService.getAll<Response_TG>({
       page,
-      country: "us",
-      apiKey: naApiKey,
+      "api-key": tgApiKey,
     });
+
+    // const naApiKey = import.meta.env.VITE_API_KEY_NA;
+    // const naRequest = naService.getAll<Response_NA>({
+    //   pageSize: 10,
+    //   page,
+    //   country: "us",
+    //   apiKey: naApiKey,
+    // });
 
     Promise.all([tgRequest.request, naRequest.request])
       .then(([tgResponse, naResponse]) => {

@@ -16,7 +16,7 @@ const ArticleList = ({ responses, searchTerm, sortOrder }: Props) => {
   return (
     <div>
       {filteredResponses?.map((response: UnifiedArticle) => {
-        return <Article key={response.id || uuidv4()} response={response} />;
+        return <Article key={uuidv4()} response={response} />;
       })}
     </div>
   );

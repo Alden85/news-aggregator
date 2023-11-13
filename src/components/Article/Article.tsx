@@ -26,7 +26,7 @@ const Article = ({ response }: Props) => {
     })
     .toLowerCase();
 
-  const key = response.id || uuidv4();
+  const key = uuidv4();
 
   return (
     <table className="table table-hover">
@@ -40,16 +40,16 @@ const Article = ({ response }: Props) => {
                 rel="noopener noreferrer"
                 style={{ color: "inherit", textDecoration: "none" }}
               >
-                <h6>{response.title}</h6>
+                <p className="fs-5">{response.title}</p>
               </a>
             </div>
             <div>
               <small className="fs-6">{response.source}</small>
             </div>
             <div>
-              <small className="text-muted">
+              <p className="text-body-secondary fs-6">
                 {formattedDate} {formattedTime}
-              </small>
+              </p>
             </div>
           </td>
         </tr>
