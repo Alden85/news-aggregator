@@ -10,9 +10,9 @@ import Header from "../Header/Header";
 import MobileFilterMenu from "../Mobile/MobileFilterMenu";
 
 const App = () => {
-  const { responses, fetchArticles } = useResponses();
   const { searchTerm, handleSearchChange } = useSearch();
-  const { page, handleMore, handlePrevious } = usePagination(1, fetchArticles);
+  const { page, handleMore, handlePrevious } = usePagination(1);
+  const { responses } = useResponses(page);
   const {
     sortOrder,
     handleSortByDate,

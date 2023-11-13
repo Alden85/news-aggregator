@@ -1,4 +1,3 @@
-// MobileFilterMenu.tsx
 import React, { useState } from "react";
 import { Button, Collapse } from "react-bootstrap";
 import FilterBy from "../Filter/FilterBy";

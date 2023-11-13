@@ -6,28 +6,19 @@ import { Response_TG } from "../interfaces/news/theguardian/response";
 import { Response_NA } from "../interfaces/news/newsapi/response";
 import { UnifiedArticle } from "../interfaces/news/unified-article";
 import { transformToUnifiedFormat } from "../utils/format";
+import { FetchOptions } from "../interfaces/fetch-options";
 
-const useResponses = () => {
+const useResponses = (page: number) => {
   const [responses, setResponses] = useState<UnifiedArticle[] | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
-  const fetchArticles = useCallback((page: number) => {
+  const fetchArticles = useCallback((options: FetchOptions = {}) => {
     setLoading(true);
 
-    const tgApiKey = import.meta.env.VITE_API_KEY_TEST_TG;
-    const tgRequest = tgService.getAll<Response_TG>({
-      page,
-      "api-key": tgApiKey,
-    });
+    const tgRequest = tgService.getAll<Response_TG>(options?.tgOptions);
 
-    const naApiKey = import.meta.env.VITE_API_KEY_NA;
-    const naRequest = naService.getAll<Response_NA>({
-      pageSize: 10,
-      page,
-      country: "us",
-      apiKey: naApiKey,
-    });
+    const naRequest = naService.getAll<Response_NA>(options?.naOptions);
 
     Promise.all([tgRequest.request, naRequest.request])
       .then(([tgResponse, naResponse]) => {
@@ -51,8 +42,19 @@ const useResponses = () => {
   }, []);
 
   useEffect(() => {
-    fetchArticles(1); // Initial fetch with page number 1
-  }, [fetchArticles]);
+    fetchArticles({
+      tgOptions: {
+        page,
+        "api-key": import.meta.env.VITE_API_KEY_TEST_TG,
+      },
+      naOptions: {
+        pageSize: 10,
+        page,
+        country: "us", //for the purpose of this project I chose to hard code it, but we could receive it as a param like we do the 'page' property.
+        apiKey: import.meta.env.VITE_API_KEY_NA,
+      },
+    });
+  }, [fetchArticles, page]);
 
   return { responses, fetchArticles, error, isLoading };
 };

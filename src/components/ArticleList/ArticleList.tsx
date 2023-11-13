@@ -1,6 +1,5 @@
 import useSearchFilter from "../../hooks/useSearchFilter";
 import { UnifiedArticle } from "../../interfaces/news/unified-article";
-//import ArticleTG from "../Article/ArticleTG";
 import { v4 as uuidv4 } from "uuid";
 import Article from "../Article/Article";
 
