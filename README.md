@@ -33,22 +33,13 @@ docker build -t news-aggregator .
 To start the application, run the below command. This command runs the Docker container, mapping port 3000 of the container to port 3000 on your host machine.
 
 ```bash
-docker run -p 3000:3000 news-aggregator
+docker run -p 3000:3000 --env-file .env news-aggregator
 ```
 
 This command will start the app and make it accessible at:
 
 ```bash
 http://localhost:3000
-```
-
-#### 4. Environment Variables
-
-You can use an environment file to pass it to the `docker run` command, as shown below.
-_(Do not commit .env files to your repository.)_
-
-```bash
-docker run -p 3000:3000 --env-file .env news-aggregator
 ```
 
 ## Contact
